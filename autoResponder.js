@@ -66,7 +66,8 @@ depend.on(['slackRtmClient', 'slackWebClient', 'easyDb'], (rtmClient, webClient,
     
     function responder(message, response) {
         
-        const text = response.caseSensitive ? message.text : message.text.toLowerCase();
+        const text = response.caseSensitive || typeof response.match != 'string' ? 
+            (message.text || '') : (message.text || '').toLowerCase();
         const match = response.caseSensitive || typeof response.match != 'string' ? 
             response.match : response.match.toLowerCase();
         
