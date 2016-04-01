@@ -2,6 +2,9 @@
 const DependOn = require('./dependOn');
 global.depend = new DependOn();
 
+const underscore = require('underscore')();
+global._ = underscore;
+
 const nedbLocation = process.env.NEDB_FILE_LOCATION;
 const Datastore = require('nedb');
 
@@ -30,3 +33,4 @@ depend.factory('slackRtmClient', [], () => {
 
 
 require('./autoResponder');
+require('./commandDispatcher');
