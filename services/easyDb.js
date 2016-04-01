@@ -37,4 +37,8 @@ class EasyDb {
     }   
 }
 
-module.exports = EasyDb;
+depend.factory(
+    'easyDb', 
+    ['nedb'], 
+    nedb => new EasyDb(nedb)
+);

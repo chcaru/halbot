@@ -37,7 +37,8 @@
 
 const commands = [
     
-    require('./karmaTracker')
+    require('./karmaTracker'),
+    require('./karmaChecker')
     
 ];
 
