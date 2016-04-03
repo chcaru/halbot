@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@slack/client": "^2.3.0",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "underscore": "^1.8.0"
   }
 }
