@@ -1,4 +1,6 @@
 
+'use strict';
+
 /*
 
     To add a new response, simply add an object
@@ -22,16 +24,16 @@
         match: string / RegExp,
         
         // REQUIRED
-        // Determines if HAL ignores case when matching.
-        // Only applies when {match} is of type string!
-        caseSensitive: boolean, (optional, default: false)
-        
-        // REQUIRED
         // If {reply} is a string[], a message will randomly be choosen from the list
         // For {message} and {sender} parameters when {reply} is a function, see: 
         //      {message}: https://api.slack.com/events/message
         //      {sender}: https://api.slack.com/methods/users.info
         reply: string | string[] | (message, sender?): string | Promise<string>,
+        
+        // Optional
+        // Determines if HAL ignores case when matching.
+        // Only applies when {match} is of type string!
+        caseSensitive: boolean,
         
         // Optional
         // Default: 1
@@ -54,7 +56,7 @@
 
 */
 
-responses = [
+const responses = [
     
     {
         name: 'C# is better (than Java)',
@@ -83,7 +85,7 @@ responses = [
         author: 'chriscaruso',
         reply: (message, sender) => {
             
-            halQuotes = [
+            const halQuotes = [
                 "Daisy, Daisy, give me your answer do. I'm half crazy all for the love of you. It won't be a stylish marriage, I can't afford a carriage. But you'll look sweet upon the seat of a bicycle built for two.",
                 'I am putting myself to the fullest possible use, which is all I think that any conscious entity can ever hope to do.',
                 "Look {username}, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over.",
@@ -104,4 +106,4 @@ responses = [
   
 ];
 
-module.exports = responses;
+depend.factory('responses', [], () => responses);

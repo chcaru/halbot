@@ -1,4 +1,6 @@
 
+'use strict';
+
 // External Services...
 
 const DependOn = require('./dependOn');
@@ -33,6 +35,10 @@ depend.factory('slackRtmClient', [], () => {
 // Internal Services...
 // Each service should load its self into depend
 
+require('./responses');
+require('./listeners');
 require('./easyDb');
 require('./userService');
 require('./karmaService');
+require('./statService');
+require('./eventDispatcher');

@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 
 class UserService {
     
@@ -9,24 +9,31 @@ class UserService {
     
     enumerateToUsers(message) {
         
-        const deferred = Promise.defer();
-        
-        var messageToHandles = 
+        const messageToHandles = 
             (message.text.match(/<@U[a-z0-9]*>/ig) || [])
-            .map(u => u.substr(2, u.length - 3))
-            .map(u => this.webClient.users.info(u));
+            .map(u => u.substr(2, u.length - 3));
         
-        Promise.all(messageToHandles).then(messageToUsers => {
-          
-            messageToUsers = 
-                (messageToUsers || [])
-                .filter(u => u.ok)
-                .map(u => u.user);  
-            
-            deferred.resolve(messageToUsers);
-        });
+        return this.enumerateUserHandles(messageToHandles);
+    }
+    
+    enumerateUserHandles(handles) {
         
-        return deferred.promise;
+        handles = handles === 'string' ? [handles] : handles;
+        
+        return Promise.all(
+            handles.map(u => 
+                this.getUserInfo(u)
+            )
+        )
+        .then(userInfos => 
+            (userInfos || [])
+            .filter(u => u.ok).map(u => u.user)
+        );
+    }
+    
+    getUserInfo(userHandle) {
+        
+        return this.webClient.users.info(userHandle);
     }
 }
 

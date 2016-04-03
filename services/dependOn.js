@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 
 class DependOn {
     
@@ -9,7 +9,7 @@ class DependOn {
     
     on(dependencies, invoke) {
 
-        if (typeof dependencies == 'string') {
+        if (typeof dependencies === 'string') {
             dependencies = [dependencies];
         }
         
@@ -22,7 +22,7 @@ class DependOn {
     
     factory(name, dependencies, factory) {
         
-        this.on(dependencies, ()=>{}).then(d => 
+        this.on(dependencies, () => {}).then(d => 
             (this.resolver[name] || (this.resolver[name] = Promise.defer())).resolve(factory(...d))
         );
     }
